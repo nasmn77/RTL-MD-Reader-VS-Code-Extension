@@ -28,7 +28,7 @@
 | Windows | `%USERPROFILE%\.vscode\extensions\` |
 | macOS / Linux | `~/.vscode/extensions/` |
 
-انسخ المجلد `nasmn.rtl-md-reader-1.0.0` بالكامل إلى المسار أعلاه، ثم أعد تشغيل VS Code.
+انسخ المجلد `naseralmadi.rtl-md-reader-1.0.0` بالكامل إلى المسار أعلاه، ثم أعد تشغيل VS Code.
 
 > تنجح هذه الطريقة لأن الإضافة لا تحتوي على أي مكوّنات مبنيّة لنظام تشغيل
 > معيّن (native modules) — كلها JavaScript خالص.

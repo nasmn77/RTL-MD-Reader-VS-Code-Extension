@@ -32,13 +32,28 @@
 
 ## التثبيت
 
-نزّل أحدث ملف `rtl-md-reader.vsix` من صفحة
-[**Releases**](https://github.com/nasmn77/RTL-MD-Reader-VS-Code-Extension/releases/latest)، ثم من داخل VS Code:
+الإضافة منشورة على متجر VS Code:
 
-<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> ← قائمة `...` ← **Install from VSIX…** ← اختر الملف ← أعد تشغيل VS Code.
+### 🔗 [**RTL Markdown Reader على المتجر**](https://marketplace.visualstudio.com/items?itemName=naseralmadi.rtl-md-reader)
+
+**من داخل VS Code:** اضغط <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> وابحث عن
+`RTL Markdown Reader` ← **Install**.
+
+**أو من سطر الأوامر:**
+
+```bash
+code --install-extension naseralmadi.rtl-md-reader
+```
+
+### التثبيت اليدوي (بدون متجر)
+
+نزّل ملف `rtl-md-reader.vsix` من صفحة
+[**Releases**](https://github.com/nasmn77/RTL-MD-Reader-VS-Code-Extension/releases/latest)،
+ثم من داخل VS Code: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> ← قائمة `...` ←
+**Install from VSIX…** ← اختر الملف ← أعد تشغيل VS Code.
 
 الملف مكتفٍ ذاتياً (١٫٨ ميجابايت) — لا يحتاج إنترنت ولا Node.js على الجهاز الهدف،
-ويعمل على Windows و macOS و Linux. للتفاصيل الكاملة: [INSTALL.md](INSTALL.md).
+ويعمل على Windows و macOS و Linux.
 
 ### البناء من المصدر
 
@@ -47,8 +62,6 @@ npm install
 npm run compile
 npx @vscode/vsce package -o rtl-md-reader.vsix
 ```
-
-للنشر على متجر VS Code: [PUBLISHING.md](PUBLISHING.md).
 
 ---
 

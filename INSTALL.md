@@ -81,33 +81,3 @@
 
 للتحقق من إصدار VS Code: **Help ← About**.
 
----
-
-## إعادة بناء ملف VSIX بعد أي تعديل
-
-من مجلد المشروع:
-
-```bash
-npm install
-npm run compile
-npx @vscode/vsce package -o rtl-md-reader.vsix
-```
-
-> **ملاحظة على هذا المشروع تحديداً:** مسار المجلد يحتوي على مسافات
-> (`RTL MD Reader Extension`)، وأداة `vsce` تفشل مع المسارات التي بها مسافات
-> لأنها تستدعي `npm` داخلياً دون اقتباس المسار. الحل: انسخ المشروع مؤقتاً
-> إلى مسار بلا مسافات (مثل `C:\build\rtl-md`) ونفّذ الأمر هناك.
-
----
-
-## نشرها للعموم (اختياري)
-
-لتثبيتها بالبحث المباشر داخل VS Code على أي جهاز، انشرها في المتجر:
-
-```bash
-npx @vscode/vsce publish
-```
-
-يتطلب ذلك حساب ناشر على [Azure DevOps](https://dev.azure.com) ورمز وصول
-شخصي (Personal Access Token). عندها يصبح التثبيت على أي جهاز:
-بحث في لوحة Extensions عن `RTL Markdown Reader` ← Install.

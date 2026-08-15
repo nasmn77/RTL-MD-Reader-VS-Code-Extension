@@ -48,6 +48,8 @@ npm run compile
 npx @vscode/vsce package -o rtl-md-reader.vsix
 ```
 
+للنشر على متجر VS Code: [PUBLISHING.md](PUBLISHING.md).
+
 ---
 
 ## الاستخدام

@@ -33,7 +33,7 @@
 ## التثبيت
 
 نزّل أحدث ملف `rtl-md-reader.vsix` من صفحة
-[**Releases**](https://github.com/nasmn77/RTL-Markdown-Reader-/releases/latest)، ثم:
+[**Releases**](https://github.com/nasmn77/RTL-MD-Reader-VS-Code-Extension/releases/latest)، ثم:
 
 ```bash
 code --install-extension rtl-md-reader.vsix

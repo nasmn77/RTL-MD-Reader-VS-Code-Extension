@@ -7,12 +7,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nasmn77/RTL-Markdown-Reader-.git"
+    "url": "https://github.com/nasmn77/RTL-MD-Reader-VS-Code-Extension.git"
   },
   "bugs": {
-    "url": "https://github.com/nasmn77/RTL-Markdown-Reader-/issues"
+    "url": "https://github.com/nasmn77/RTL-MD-Reader-VS-Code-Extension/issues"
   },
-  "homepage": "https://github.com/nasmn77/RTL-Markdown-Reader-#readme",
+  "homepage": "https://github.com/nasmn77/RTL-MD-Reader-VS-Code-Extension#readme",
   "engines": {
     "vscode": "^1.85.0"
   },

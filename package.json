@@ -1,0 +1,273 @@
+{
+  "name": "rtl-md-reader",
+  "displayName": "RTL Markdown Reader — قارئ ماركداون عربي",
+  "description": "عرض ملفات Markdown بالكامل من اليمين إلى اليسار (RTL) مع دعم الجداول والقوائم والاقتباسات والكود ومخططات Mermaid.",
+  "version": "1.0.0",
+  "publisher": "nasmn",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nasmn77/RTL-Markdown-Reader-.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nasmn77/RTL-Markdown-Reader-/issues"
+  },
+  "homepage": "https://github.com/nasmn77/RTL-Markdown-Reader-#readme",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "rtl",
+    "arabic",
+    "عربي",
+    "hebrew",
+    "persian",
+    "preview"
+  ],
+  "icon": "media/icon.png",
+  "activationEvents": [
+    "onLanguage:markdown"
+  ],
+  "main": "./out/extension.js",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "rtlMd.reader",
+        "displayName": "RTL Markdown Reader",
+        "selector": [
+          {
+            "filenamePattern": "*.md"
+          },
+          {
+            "filenamePattern": "*.markdown"
+          },
+          {
+            "filenamePattern": "*.mdown"
+          },
+          {
+            "filenamePattern": "*.mkd"
+          }
+        ],
+        "priority": "option"
+      }
+    ],
+    "commands": [
+      {
+        "command": "rtlMd.openPreview",
+        "title": "RTL Markdown: فتح المعاينة (RTL)",
+        "category": "RTL Markdown",
+        "icon": "$(book)"
+      },
+      {
+        "command": "rtlMd.openPreviewToSide",
+        "title": "RTL Markdown: فتح المعاينة بجانب المحرر",
+        "category": "RTL Markdown",
+        "icon": "$(open-preview)"
+      },
+      {
+        "command": "rtlMd.toggleDirection",
+        "title": "RTL Markdown: تبديل الاتجاه (RTL/LTR)",
+        "category": "RTL Markdown"
+      },
+      {
+        "command": "rtlMd.makeDefault",
+        "title": "RTL Markdown: جعلها المعاينة الافتراضية لملفات MD",
+        "category": "RTL Markdown"
+      },
+      {
+        "command": "rtlMd.clearDefault",
+        "title": "RTL Markdown: إلغاء جعلها الافتراضية",
+        "category": "RTL Markdown"
+      },
+      {
+        "command": "rtlMd.exportHtml",
+        "title": "RTL Markdown: تصدير إلى HTML",
+        "category": "RTL Markdown"
+      },
+      {
+        "command": "rtlMd.print",
+        "title": "RTL Markdown: طباعة / حفظ PDF",
+        "category": "RTL Markdown"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "rtlMd.openPreviewToSide",
+          "when": "editorLangId == markdown",
+          "group": "navigation@1"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "rtlMd.openPreview",
+          "when": "resourceLangId == markdown",
+          "group": "navigation@10"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "rtlMd.toggleDirection",
+          "when": "rtlMd.previewFocused"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "rtlMd.openPreviewToSide",
+        "key": "ctrl+k v",
+        "mac": "cmd+k v",
+        "when": "editorLangId == markdown || activeCustomEditorId == 'rtlMd.reader'"
+      },
+      {
+        "command": "rtlMd.makeDefault",
+        "key": "ctrl+alt+r",
+        "mac": "cmd+alt+r"
+      }
+    ],
+    "markdown.markdownItPlugins": true,
+    "markdown.previewStyles": [
+      "./media/builtin-preview-rtl.css"
+    ],
+    "configuration": {
+      "title": "RTL Markdown Reader",
+      "properties": {
+        "rtlMd.direction": {
+          "type": "string",
+          "enum": [
+            "rtl",
+            "ltr",
+            "auto"
+          ],
+          "enumDescriptions": [
+            "دائماً من اليمين إلى اليسار",
+            "دائماً من اليسار إلى اليمين",
+            "تحديد تلقائي حسب محتوى الملف"
+          ],
+          "default": "rtl",
+          "description": "اتجاه عرض المستند."
+        },
+        "rtlMd.applyToBuiltinPreview": {
+          "type": "boolean",
+          "default": true,
+          "description": "تطبيق اتجاه RTL أيضاً على معاينة Markdown المدمجة في VS Code."
+        },
+        "rtlMd.fontFamily": {
+          "type": "string",
+          "default": "",
+          "description": "خط النص الأساسي. اتركه فارغاً لاستخدام الخط الافتراضي المناسب للعربية."
+        },
+        "rtlMd.fontSize": {
+          "type": "number",
+          "default": 16,
+          "minimum": 8,
+          "maximum": 48,
+          "description": "حجم الخط بالبكسل."
+        },
+        "rtlMd.lineHeight": {
+          "type": "number",
+          "default": 1.9,
+          "minimum": 1,
+          "maximum": 4,
+          "description": "ارتفاع السطر."
+        },
+        "rtlMd.maxContentWidth": {
+          "type": "string",
+          "default": "980px",
+          "description": "أقصى عرض للمحتوى (مثل 980px أو 100%)."
+        },
+        "rtlMd.codeBlockDirection": {
+          "type": "string",
+          "enum": [
+            "ltr",
+            "rtl",
+            "inherit"
+          ],
+          "default": "ltr",
+          "description": "اتجاه كتل الكود. يُنصح ببقائها ltr."
+        },
+        "rtlMd.tableHeaderAlign": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "right",
+            "center",
+            "left"
+          ],
+          "default": "auto",
+          "description": "محاذاة رؤوس الجداول. 'auto' يتبع الاتجاه العام."
+        },
+        "rtlMd.enableMermaid": {
+          "type": "boolean",
+          "default": true,
+          "description": "تفعيل عرض مخططات Mermaid."
+        },
+        "rtlMd.enableMath": {
+          "type": "boolean",
+          "default": true,
+          "description": "تفعيل المعادلات الرياضية بصيغة KaTeX ($...$ و $$...$$)."
+        },
+        "rtlMd.enableTaskLists": {
+          "type": "boolean",
+          "default": true,
+          "description": "تفعيل قوائم المهام - [ ] و - [x]."
+        },
+        "rtlMd.enableFootnotes": {
+          "type": "boolean",
+          "default": true,
+          "description": "تفعيل الحواشي السفلية [^1]."
+        },
+        "rtlMd.syncScroll": {
+          "type": "boolean",
+          "default": true,
+          "description": "مزامنة التمرير بين المحرر والمعاينة."
+        },
+        "rtlMd.showToolbar": {
+          "type": "boolean",
+          "default": true,
+          "description": "إظهار شريط الأدوات أعلى المعاينة."
+        },
+        "rtlMd.showToc": {
+          "type": "boolean",
+          "default": false,
+          "description": "إظهار فهرس المحتويات الجانبي."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "node ./scripts/prepublish.js",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package --no-dependencies -o rtl-md-reader.vsix"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.2.0",
+    "markdown-it-attrs": "^4.3.1",
+    "markdown-it-deflist": "^3.0.0",
+    "markdown-it-footnote": "^4.0.0",
+    "markdown-it-ins": "^4.0.0",
+    "markdown-it-mark": "^4.0.0",
+    "markdown-it-multimd-table": "^4.2.3",
+    "markdown-it-sub": "^2.0.0",
+    "markdown-it-sup": "^2.0.0",
+    "markdown-it-task-lists": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "^20.14.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.5.4"
+  }
+}

@@ -1,0 +1,164 @@
+/*
+ * Injected into VS Code's built-in Markdown preview via
+ * `contributes.markdown.previewStyles`.
+ *
+ * The stock preview is hard-coded LTR, so every rule here has to override a
+ * built-in one. Layout properties are mirrored (margins, padding, borders,
+ * list markers), while code and math stay LTR.
+ */
+
+body {
+  direction: rtl;
+  text-align: right;
+  font-family: 'Segoe UI', 'Noto Naskh Arabic', 'Geeza Pro', 'Dubai', Tahoma,
+    'Amiri', 'Scheherazade New', system-ui, -apple-system, sans-serif;
+  line-height: 1.9;
+}
+
+/* ---------- Headings ---------- */
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6 {
+  text-align: right;
+  line-height: 1.45;
+}
+
+/* ---------- Lists: markers move to the right ---------- */
+body ul,
+body ol {
+  padding-right: 2em;
+  padding-left: 0;
+  text-align: right;
+}
+
+body ul ul,
+body ul ol,
+body ol ul,
+body ol ol {
+  padding-right: 1.6em;
+  padding-left: 0;
+}
+
+body ol {
+  list-style-type: arabic-indic;
+}
+
+/* Task lists */
+body .task-list-item {
+  list-style: none;
+}
+
+body .task-list-item input[type='checkbox'] {
+  margin-right: 0;
+  margin-left: 0.55em;
+  float: none;
+}
+
+body .contains-task-list {
+  padding-right: 1.6em;
+  padding-left: 0;
+}
+
+/* ---------- Blockquote: accent border flips to the right ---------- */
+body blockquote {
+  border-right: 4px solid var(--vscode-textBlockQuote-border, #0969da);
+  border-left: none;
+  padding: 0.55em 1.1em;
+  margin-right: 0;
+  margin-left: 0;
+  text-align: right;
+}
+
+/* ---------- Definition lists ---------- */
+body dd {
+  margin-right: 1.6em;
+  margin-left: 0;
+  padding-right: 0;
+}
+
+/* ---------- TABLES ---------- */
+body table {
+  direction: rtl;
+  border-collapse: collapse;
+  text-align: right;
+}
+
+body table th,
+body table td {
+  text-align: right;
+  padding: 0.55em 0.85em;
+  border: 1px solid var(--vscode-panel-border, rgba(128, 128, 128, 0.35));
+  vertical-align: top;
+}
+
+body table th {
+  font-weight: 700;
+  background: rgba(128, 128, 128, 0.14);
+}
+
+body table tbody tr:nth-child(even) {
+  background: rgba(128, 128, 128, 0.06);
+}
+
+/* Explicit |:---:| alignment from the source must win over the RTL default. */
+body table th[style*='text-align:center'],
+body table td[style*='text-align:center'] {
+  text-align: center !important;
+}
+body table th[style*='text-align:right'],
+body table td[style*='text-align:right'] {
+  text-align: right !important;
+}
+body table th[style*='text-align:left'],
+body table td[style*='text-align:left'] {
+  text-align: left !important;
+}
+
+/* ---------- Code stays LTR ---------- */
+body pre,
+body pre code,
+body code {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: isolate;
+}
+
+body pre {
+  overflow-x: auto;
+}
+
+body kbd {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* ---------- Math stays LTR ---------- */
+body .katex,
+body .katex-display {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* ---------- Footnotes ---------- */
+body .footnotes {
+  text-align: right;
+}
+
+body .footnotes ol {
+  padding-right: 1.8em;
+  padding-left: 0;
+}
+
+body .footnote-backref {
+  margin-right: 0.35em;
+  margin-left: 0;
+}
+
+/* ---------- Horizontal overflow guard ---------- */
+body img {
+  max-width: 100%;
+  height: auto;
+}

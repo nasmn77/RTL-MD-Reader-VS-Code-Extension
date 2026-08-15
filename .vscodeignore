@@ -1,0 +1,15 @@
+.vscode/**
+.vscode-test/**
+src/**
+sample/rendered-debug.html
+**/*.ts
+**/*.map
+.gitignore
+tsconfig.json
+node_modules/.bin/**
+node_modules/typescript/**
+node_modules/@types/**
+node_modules/mermaid/**
+node_modules/katex/**
+node_modules/.package-lock.json
+scripts/**

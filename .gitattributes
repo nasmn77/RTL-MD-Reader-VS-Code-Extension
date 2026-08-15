@@ -1,0 +1,11 @@
+# Normalise text files to LF in the repository, checked out natively.
+* text=auto eol=lf
+
+# Vendored, minified assets — never diff or normalise these.
+media/mermaid.min.js   -diff -text linguist-vendored
+media/katex/**         -diff -text linguist-vendored
+
+# Binary assets.
+*.png    binary
+*.woff2  binary
+*.vsix   binary

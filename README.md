@@ -33,13 +33,9 @@
 ## التثبيت
 
 نزّل أحدث ملف `rtl-md-reader.vsix` من صفحة
-[**Releases**](https://github.com/nasmn77/RTL-MD-Reader-VS-Code-Extension/releases/latest)، ثم:
+[**Releases**](https://github.com/nasmn77/RTL-MD-Reader-VS-Code-Extension/releases/latest)، ثم من داخل VS Code:
 
-```bash
-code --install-extension rtl-md-reader.vsix
-```
-
-أو من داخل VS Code: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> ← قائمة `...` ← **Install from VSIX…**
+<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> ← قائمة `...` ← **Install from VSIX…** ← اختر الملف ← أعد تشغيل VS Code.
 
 الملف مكتفٍ ذاتياً (١٫٨ ميجابايت) — لا يحتاج إنترنت ولا Node.js على الجهاز الهدف،
 ويعمل على Windows و macOS و Linux. للتفاصيل الكاملة: [INSTALL.md](INSTALL.md).

@@ -39,12 +39,6 @@
 **من داخل VS Code:** اضغط <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> وابحث عن
 `RTL Markdown Reader` ← **Install**.
 
-**أو من سطر الأوامر:**
-
-```bash
-code --install-extension naseralmadi.rtl-md-reader
-```
-
 ### التثبيت اليدوي (بدون متجر)
 
 نزّل ملف `rtl-md-reader.vsix` من صفحة

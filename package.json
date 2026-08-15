@@ -5,6 +5,10 @@
   "version": "1.0.0",
   "publisher": "nasmn",
   "license": "MIT",
+  "author": {
+    "name": "Naser Almadi",
+    "email": "nasmn77@gmail.com"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/nasmn77/RTL-MD-Reader-VS-Code-Extension.git"
@@ -30,6 +34,10 @@
     "preview"
   ],
   "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#2563EB",
+    "theme": "dark"
+  },
   "activationEvents": [
     "onLanguage:markdown"
   ],

@@ -2,3 +2,4 @@ node_modules/
 out/
 *.vsix
 sample/rendered-debug.html
+nul

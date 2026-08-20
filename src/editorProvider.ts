@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import { buildHtmlDocument } from './webviewHtml';
 import { createMarkdownIt, detectDirection } from './renderer';
 import { getConfig, resolveDirection } from './config';
-import { basename, buildResourceRoots } from './extension';
+import { basename, buildResourceRoots, openLink } from './extension';
 
 /**
  * A read-only custom text editor for Markdown. Registering it lets the user set
@@ -113,24 +113,9 @@ export class RtlMarkdownEditorProvider implements vscode.CustomTextEditorProvide
         );
         break;
       }
-      case 'openLink': {
-        const href = msg.href;
-        if (typeof href !== 'string') {
-          return;
-        }
-        if (/^(https?|mailto):/i.test(href)) {
-          await vscode.env.openExternal(vscode.Uri.parse(href));
-        } else {
-          try {
-            const base = vscode.Uri.joinPath(document.uri, '..');
-            const targetUri = vscode.Uri.joinPath(base, href.split('#')[0]);
-            await vscode.commands.executeCommand('vscode.open', targetUri);
-          } catch {
-            vscode.window.showWarningMessage(`تعذر فتح الرابط: ${href}`);
-          }
-        }
+      case 'openLink':
+        await openLink(msg.href, document.uri);
         break;
-      }
       case 'copy':
         if (typeof msg.text === 'string') {
           await vscode.env.clipboard.writeText(msg.text);

@@ -164,7 +164,7 @@ async function handleWebviewMessage(msg: any, doc: vscode.TextDocument): Promise
       break;
     }
     case 'openLink': {
-      await openLink(msg.href, doc);
+      await openLink(msg.href, doc.uri);
       break;
     }
     case 'toggleDirection': {
@@ -185,22 +185,77 @@ async function handleWebviewMessage(msg: any, doc: vscode.TextDocument): Promise
   }
 }
 
-async function openLink(href: unknown, doc: vscode.TextDocument): Promise<void> {
+/**
+ * Resolve a Markdown link href to a workspace URI.
+ *
+ * Markdown link targets are URL-encoded, so `%20` and friends must be decoded
+ * before the text reaches `Uri.joinPath` -- otherwise a path containing spaces
+ * resolves to a file that does not exist. Absolute paths, `file:` URIs and
+ * Windows drive letters are handled separately from document-relative paths.
+ * Returns `undefined` when the href is not a file reference we can resolve.
+ */
+export function resolveLinkUri(
+  href: string,
+  docUri: vscode.Uri
+): { uri: vscode.Uri; fragment: string } | undefined {
+  const hashAt = href.indexOf('#');
+  const rawPath = hashAt === -1 ? href : href.slice(0, hashAt);
+  const fragment = hashAt === -1 ? '' : href.slice(hashAt + 1);
+
+  if (rawPath.length === 0) {
+    return undefined;
+  }
+
+  let path: string;
+  try {
+    path = decodeURIComponent(rawPath);
+  } catch {
+    // Malformed percent-escapes: fall back to the literal text.
+    path = rawPath;
+  }
+  path = path.replace(/\\/g, '/');
+
+  if (/^file:/i.test(rawPath)) {
+    return { uri: vscode.Uri.parse(rawPath), fragment };
+  }
+  if (path.startsWith('/') || /^[a-zA-Z]:\//.test(path)) {
+    return { uri: vscode.Uri.file(path), fragment };
+  }
+  return { uri: vscode.Uri.joinPath(docUri, '..', path), fragment };
+}
+
+/**
+ * Open a link clicked inside the reader. Markdown files are handed to
+ * `vscode.open` so the user's editor association decides whether they land in
+ * the reader or the text editor; anything else opens with its default handler.
+ */
+export async function openLink(href: unknown, docUri: vscode.Uri): Promise<void> {
   if (typeof href !== 'string' || href.length === 0) {
     return;
   }
-  if (/^(https?|mailto):/i.test(href)) {
+  if (/^(https?|mailto|vscode|command):/i.test(href)) {
     await vscode.env.openExternal(vscode.Uri.parse(href));
     return;
   }
-  // Relative link -> resolve against the document folder and open it.
+
+  const resolved = resolveLinkUri(href, docUri);
+  if (!resolved) {
+    return;
+  }
+
+  // Confirm the target exists before opening: `vscode.open` fails silently on a
+  // missing file, which looks to the user like the click did nothing at all.
   try {
-    const base = vscode.Uri.joinPath(doc.uri, '..');
-    const [path, fragment] = href.split('#');
-    const targetUri = vscode.Uri.joinPath(base, path);
-    const targetDoc = await vscode.workspace.openTextDocument(targetUri);
-    await vscode.window.showTextDocument(targetDoc, { preview: false });
-    void fragment;
+    await vscode.workspace.fs.stat(resolved.uri);
+  } catch {
+    vscode.window.showWarningMessage(
+      `تعذر فتح الرابط - الملف غير موجود: ${href}`
+    );
+    return;
+  }
+
+  try {
+    await vscode.commands.executeCommand('vscode.open', resolved.uri);
   } catch {
     vscode.window.showWarningMessage(`تعذر فتح الرابط: ${href}`);
   }

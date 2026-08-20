@@ -20,7 +20,13 @@ const tsc = join(
 );
 
 if (existsSync(tsc)) {
-  const res = spawnSync(tsc, ['-p', './'], { cwd: root, stdio: 'inherit', shell: true });
+  // `shell: true` re-parses the command line, so the path -- which may contain
+  // spaces -- has to be quoted or cmd.exe truncates it at the first space.
+  const res = spawnSync(JSON.stringify(tsc), ['-p', './'], {
+    cwd: root,
+    stdio: 'inherit',
+    shell: true
+  });
   process.exit(res.status === null ? 1 : res.status);
 }
 

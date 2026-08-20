@@ -2,7 +2,7 @@
   "name": "rtl-md-reader",
   "displayName": "RTL Markdown Reader — قارئ ماركداون عربي",
   "description": "عرض ملفات Markdown بالكامل من اليمين إلى اليسار (RTL) مع دعم الجداول والقوائم والاقتباسات والكود ومخططات Mermaid.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "naseralmadi",
   "license": "MIT",
   "author": {
@@ -39,7 +39,8 @@
     "theme": "dark"
   },
   "activationEvents": [
-    "onLanguage:markdown"
+    "onLanguage:markdown",
+    "onCustomEditor:rtlMd.reader"
   ],
   "main": "./out/extension.js",
   "capabilities": {
@@ -66,7 +67,7 @@
             "filenamePattern": "*.mkd"
           }
         ],
-        "priority": "option"
+        "priority": "default"
       }
     ],
     "commands": [
@@ -257,7 +258,7 @@
     "vscode:prepublish": "node ./scripts/prepublish.js",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "package": "vsce package --no-dependencies -o rtl-md-reader.vsix"
+    "package": "vsce package -o rtl-md-reader.vsix"
   },
   "dependencies": {
     "markdown-it": "^14.1.0",
